@@ -25,18 +25,8 @@ public class CategoryService implements IListService<Category> {
 
     @Override
     public PageModel<Category> list(FilterModel filter) {
-        Integer page = filter.getPage();
-        Integer limit = filter.getLimit();
-
-        Page<Category> categoryPage = repository.findAll(PageRequest.of(page, limit));
-
-        List<Category> categories = categoryPage.getContent();
-        Long totalElements = categoryPage.getTotalElements();
-        Integer currentPage = categoryPage.getNumber();
-        Integer totalPages = categoryPage.getTotalPages();
-        Integer pageSize = categoryPage.getSize();
-
-        PageModel<Category> pageModel = new PageModel<>(totalElements, currentPage, totalPages, pageSize, categories);
+        Page<Category> categoryPage = repository.findAll(filter.toSpringPegeable());
+        PageModel<Category> pageModel = new PageModel<>(categoryPage);
         return pageModel;
     }
 }
