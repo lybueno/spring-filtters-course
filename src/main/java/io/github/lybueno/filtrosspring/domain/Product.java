@@ -19,7 +19,7 @@ public class Product {
     @Column(nullable = false)
     private Double price;
 
-    @Column(name = "qty_stk", nullable = false)
+    @Column(name = "qtd_stk", nullable = false)
     private Integer qtdStk;
 
     @Column(name = "creation_date", nullable = false)
