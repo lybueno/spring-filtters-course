@@ -5,6 +5,7 @@ import io.github.lybueno.filtrosspring.model.FilterModel;
 import io.github.lybueno.filtrosspring.model.PageModel;
 import io.github.lybueno.filtrosspring.repository.SupplierRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,6 +24,8 @@ public class SupplierService implements IListService<Supplier> {
 
     @Override
     public PageModel<Supplier> list(FilterModel filter) {
-        return null;
+        Page<Supplier> supplierPage = repository.findAll(filter.toSpringPegeable());
+        PageModel<Supplier> pageModel = new PageModel<>(supplierPage);
+        return pageModel;
     }
 }

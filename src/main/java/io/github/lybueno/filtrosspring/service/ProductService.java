@@ -5,6 +5,7 @@ import io.github.lybueno.filtrosspring.model.FilterModel;
 import io.github.lybueno.filtrosspring.model.PageModel;
 import io.github.lybueno.filtrosspring.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,6 +24,8 @@ public class ProductService implements IListService<Product> {
 
     @Override
     public PageModel<Product> list(FilterModel filter) {
-        return null;
+        Page<Product> productPage = repository.findAll(filter.toSpringPegeable());
+        PageModel<Product> pageModel = new PageModel<>(productPage);
+        return pageModel;
     }
 }
